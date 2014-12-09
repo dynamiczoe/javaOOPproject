@@ -15,7 +15,7 @@ public class Calculateclass {
 		solaric = new Solaric();
 	}
 
-	void 값_설정하기(String start_holidayName, int start_solar_or_lunar, String finish_holidayName, int finish_solar_or_lunar, Holidays[] holidays) {
+	void set_DataToCalculate(String start_holidayName, int start_solar_or_lunar, String finish_holidayName, int finish_solar_or_lunar, Holidays[] holidays) {
 		this.start_HolidayName = start_holidayName;
 		this.finish_HolidayName = finish_holidayName;
 		this.start_solar_or_lunar = start_solar_or_lunar;
