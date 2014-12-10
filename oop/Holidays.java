@@ -10,8 +10,8 @@ public class Holidays {
 			"郴积老", "己藕例" }; // 郴积老 (辣崔) 9.22老
 	private String holiday_name = null;
 	private int hDay_date = 0;
-	private int hDay_solar_or_lunar = 0;
-	private int hDay_normal_or_abnormal = 0;
+	private int hDay_isLunar = 0;
+	private int hDay_isAbnormal = 0;
 	
 	public int get_holidayIndex_From_Name(String recieved_name) {
 		int index = 0;
@@ -23,12 +23,21 @@ public class Holidays {
 	}
 	public void set_Hday_name(int i) { holiday_name = holiday_name_Array[i]; }
 	public void set_Hday_date(int i) { hDay_date = date[i]; }
-	public void set_Hday_solar_or_lunar(int i) { hDay_solar_or_lunar = solar_lunar[i]; }
-	public void set_Hday_normal_or_abnormal(int i) { hDay_normal_or_abnormal = normal_abnormal[i]; }
+	public void set_Hday_solar_or_lunar(int i) { hDay_isLunar = solar_lunar[i]; }
+	public void set_Hday_normal_or_abnormal(int i) { hDay_isAbnormal = normal_abnormal[i]; }
 	
 	public String get_Holiday_name() { return holiday_name; }
 	public int get_hDay_numbers() { return date.length; }
-	public int get_hDay_solar_or_lunar() { return hDay_solar_or_lunar; }
-	public int get_hDay_normal_or_abnormal() { return hDay_normal_or_abnormal; }
 	public int get_hDay_date() { return hDay_date; }
+	public boolean get_IsItLunar() { 
+		if(hDay_isLunar==1)
+			return true;
+		else
+			return false; 
+		}
+	public boolean get_IsItAbnormal() { 
+		if(hDay_isAbnormal==1)
+			return true;
+		else
+			return false; }
 }
