@@ -3,7 +3,7 @@ package oop;
 public class Lunaric {
 	private int[] months = { 0, 1, 2, 1, 2, 1, 2, 1, 2, 4, 2, 1, 2 };
 
-	int get_LunaricLastDayOfMonth(int lunar_year, int lunar_month,
+	public int get_LunaricLastDayOfMonth(int lunar_year, int lunar_month,
 			int normal_or_abnormal) {
 		int lastday = 0;
 
@@ -16,17 +16,15 @@ public class Lunaric {
 			break;
 		case 3:
 			lastday = 29;
-			if (normal_or_abnormal == 1) {
+			if (isAbnormal(normal_or_abnormal)) 
 				lastday = 30;
-			}
-			;
+						
 			break;
 		case 4:
 			lastday = 30;
-			if (normal_or_abnormal == 1) {
+			if (isAbnormal(normal_or_abnormal)) 
 				lastday = 29;
-			}
-			;
+					
 			break;
 		case 5:
 			lastday = 30;
@@ -36,11 +34,10 @@ public class Lunaric {
 		}
 		return lastday;
 	}
-
-	int calculate_LunaricElapsedDays(int lunar_year, int lunar_month, int lunar_day) {
+	public int calculate_LunaricElapsedDays(int lunar_year, int lunar_month, int lunar_day) {
 		int elapsedDay = 0;
 		for (int i = 1; i < lunar_month; i++) {
-			if (lunar_month == 1) {
+			if (isAbnormal(lunar_month)) {
 				break;
 			}
 
@@ -66,6 +63,9 @@ public class Lunaric {
 		}
 		elapsedDay = elapsedDay + lunar_day;
 		return elapsedDay;
+	}
+	private boolean isAbnormal(int normal_or_abnormal) {
+		return normal_or_abnormal == 1;
 	}
 
 }
