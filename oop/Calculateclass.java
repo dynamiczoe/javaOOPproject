@@ -17,11 +17,11 @@ public class Calculateclass {
 		solaric = new Solaric();
 	}
 
-	public void set_DataToCalculate(String start_holidayName, boolean isStartLunar, String finish_holidayName,	boolean isFinishLunar, Holidays[] holidays) {
-		this.start_HolidayName = start_holidayName;
-		this.finish_HolidayName = finish_holidayName;
-		this.isStartLunar = isStartLunar;
-		this.isFinishLunar = isFinishLunar;
+	public void set_DataToCalculate(String[] holidayName, boolean[] isLunar, Holidays[] holidays) {
+		this.start_HolidayName = holidayName[0];
+		this.finish_HolidayName = holidayName[1];
+		this.isStartLunar = isLunar[0];
+		this.isFinishLunar = isLunar[1];
 		array_Holidays = holidays;
 	}
 
@@ -36,10 +36,8 @@ public class Calculateclass {
 			date[1] = start_date % 100;
 			date[2] = finish_date / 100;
 			date[3] = finish_date % 100;
-			int start_date_lunaric = lunaric.calculate_LunaricElapsedDays(year,
-					date[0], date[1]);
-			int finish_date_lunaric = lunaric.calculate_LunaricElapsedDays(
-					year, date[2], date[3]);
+			int start_date_lunaric = lunaric.calculate_ElapsedDays( date[0], date[1], year );
+			int finish_date_lunaric = lunaric.calculate_ElapsedDays( date[2], date[3], year );
 			elapsedDays = finish_date_lunaric - start_date_lunaric;
 
 			int start_lunarMonth, start_lunarDay, finish_lunarMonth, finish_lunarDay;
@@ -48,16 +46,10 @@ public class Calculateclass {
 			finish_lunarMonth = finish_date / 100;
 			finish_lunarDay = finish_date % 100;
 
-			int start_Lunaric_ElapsedDay = lunaric
-					.calculate_LunaricElapsedDays(year, start_lunarMonth,
-							start_lunarDay);
-			start_holiday_date = solaric
-					.convert_LunaricElapsedDayToSolaricElapsedDay(start_Lunaric_ElapsedDay);
-			int finish_Lunaric_ElapsedDay = lunaric
-					.calculate_LunaricElapsedDays(year, finish_lunarMonth,
-							finish_lunarDay);
-			finish_holiday_date = solaric
-					.convert_LunaricElapsedDayToSolaricElapsedDay(finish_Lunaric_ElapsedDay);
+			int start_Lunaric_ElapsedDay = lunaric.calculate_ElapsedDays( start_lunarMonth, start_lunarDay, year );
+			start_holiday_date = solaric.convert_LunaricElapsedDayToSolaricElapsedDay( start_Lunaric_ElapsedDay );
+			int finish_Lunaric_ElapsedDay = lunaric.calculate_ElapsedDays( finish_lunarMonth, finish_lunarDay, year );
+			finish_holiday_date = solaric.convert_LunaricElapsedDayToSolaricElapsedDay( finish_Lunaric_ElapsedDay );
 
 			date[5] = start_holiday_date;
 			date[6] = finish_holiday_date;
@@ -66,19 +58,15 @@ public class Calculateclass {
 			start_lunaricMonth = start_date / 100;
 			start_lunaricDay = start_date % 100;
 			date[5] = start_date;
-			int start_LunaricElapsedDay = lunaric.calculate_LunaricElapsedDays(
-					year, start_lunaricMonth, start_lunaricDay);
-			start_holiday_date = solaric
-					.convert_LunaricElapsedDayToSolaricElapsedDay(start_LunaricElapsedDay);
+			int start_LunaricElapsedDay = lunaric.calculate_ElapsedDays(start_lunaricMonth, start_lunaricDay, year);
+			start_holiday_date = solaric.convert_LunaricElapsedDayToSolaricElapsedDay(start_LunaricElapsedDay);
 			date[0] = start_holiday_date / 100;
 			date[1] = start_holiday_date % 100;
 
 			date[2] = finish_date / 100;
 			date[3] = finish_date % 100;
-			int start_ElapsedDay = solaric.calculate_SolaricElapsedDays(
-					date[0], date[1]);
-			int finish_ElapsedDay = solaric.calculate_SolaricElapsedDays(
-					date[2], date[3]);
+			int start_ElapsedDay = solaric.calculate_ElapsedDays(date[0], date[1], 0);
+			int finish_ElapsedDay = solaric.calculate_ElapsedDays(date[2], date[3], 0);
 
 			elapsedDays = finish_ElapsedDay - start_ElapsedDay;
 		} else if (issolarXlunar()) {
@@ -90,16 +78,12 @@ public class Calculateclass {
 			finish_lunaricDay = finish_date % 100;
 			date[6] = finish_date;
 
-			int lunaric_elapsedDays = lunaric.calculate_LunaricElapsedDays(
-					year, finish_lunaricMonth, finish_lunaricDay);
-			finish_holiday_date = solaric
-					.convert_LunaricElapsedDayToSolaricElapsedDay(lunaric_elapsedDays);
+			int lunaric_elapsedDays = lunaric.calculate_ElapsedDays(finish_lunaricMonth, finish_lunaricDay, year);
+			finish_holiday_date = solaric.convert_LunaricElapsedDayToSolaricElapsedDay(lunaric_elapsedDays);
 			date[2] = finish_holiday_date / 100;
 			date[3] = finish_holiday_date % 100;
-			int start_ElapsedDay = solaric.calculate_SolaricElapsedDays(
-					date[0], date[1]);
-			int finish_ElapsedDay = solaric.calculate_SolaricElapsedDays(
-					date[2], date[3]);
+			int start_ElapsedDay = solaric.calculate_ElapsedDays(0,date[0], date[1]);
+			int finish_ElapsedDay = solaric.calculate_ElapsedDays(0,date[2], date[3]);
 
 			elapsedDays = finish_ElapsedDay - start_ElapsedDay;
 		} else if (issolarXsolar()) {
@@ -108,10 +92,8 @@ public class Calculateclass {
 			date[2] = finish_date / 100;
 			date[3] = finish_date % 100;
 
-			int start_ElapsedDay = solaric.calculate_SolaricElapsedDays(
-					date[0], date[1]);
-			int finish_ElpsedDay = solaric.calculate_SolaricElapsedDays(
-					date[2], date[3]);
+			int start_ElapsedDay = solaric.calculate_ElapsedDays(date[0], date[1], 0);
+			int finish_ElpsedDay = solaric.calculate_ElapsedDays(date[2], date[3], 0);
 
 			elapsedDays = finish_ElpsedDay - start_ElapsedDay;
 		}
@@ -119,7 +101,7 @@ public class Calculateclass {
 	}
 
 	private boolean islunarXlunar() {
-		if (isStartLunar == true && isFinishLunar == true) {			
+		if (isStartLunar == true && isFinishLunar == true) {			// 이하 유사 메소드들은 가독성이 쉽도록 extract함
 			return true;
 		} else
 			return false;

@@ -1,10 +1,8 @@
 package oop;
 
 public class Controller {
-	private String startHolidayName, finishHolidayName;
 	int start, finish;
 	int[] intArray_CalculatedDate, inputedNumbers;
-	String[] strArray_InputedHolidayNames = new String[2];
 	Calculateclass calculate;
 	Inputclass input;
 	Outputclass output;
@@ -32,12 +30,20 @@ public class Controller {
 
 	public String[] get_Holiday_Names() {
 		String holidayName[] = new String[2];
-		holidayName[0] = array_Holidays[inputedNumbers[0]].get_Holiday_name();
-		holidayName[1] = array_Holidays[inputedNumbers[1]].get_Holiday_name();
+		holidayName[0] = array_Holidays[start].get_Holiday_name();
+		holidayName[1] = array_Holidays[finish].get_Holiday_name();
 		return holidayName;
 	}
 
+	public boolean[] get_Islunar() {
+		boolean isStartHolidayLunar = array_Holidays[start].get_IsItLunar();
+		boolean isFinishHolidayLunar = array_Holidays[finish].get_IsItLunar();
+		boolean[] islunar = { isStartHolidayLunar, isFinishHolidayLunar };
+		return islunar;
+	}
+
 	public void ShowDifferenceOfDaysBetwenTheseTwoHolidays() {
+		
 		setHolidays();
 		output.show_List(array_Holidays);
 		input.input_StartAndEnd();
@@ -45,15 +51,12 @@ public class Controller {
 		inputedNumbers = input.get_InputedNumbers();
 		start = inputedNumbers[0];
 		finish = inputedNumbers[1];
-		strArray_InputedHolidayNames = get_Holiday_Names();
-		startHolidayName = strArray_InputedHolidayNames[0];
-		finishHolidayName = strArray_InputedHolidayNames[1];
-		boolean isStartHolidayLunar = array_Holidays[start].get_IsItLunar();
-		boolean isFinishHolidayLunar = array_Holidays[finish].get_IsItLunar();
+		String[] strArray_InputedHolidayNames = get_Holiday_Names();
+		boolean[] booleanArray_islunar = get_Islunar();
 
-		calculate.set_DataToCalculate(startHolidayName, isStartHolidayLunar,
-				finishHolidayName, isFinishHolidayLunar, array_Holidays);
+		calculate.set_DataToCalculate(strArray_InputedHolidayNames, booleanArray_islunar, array_Holidays);
 		calculate.clacualte_ElapsedDays();
+		
 		intArray_CalculatedDate = calculate.get_Date_Array();
 
 		output.set_values(intArray_CalculatedDate, strArray_InputedHolidayNames);

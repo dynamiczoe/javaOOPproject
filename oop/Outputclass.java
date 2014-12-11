@@ -47,7 +47,7 @@ public class Outputclass {
 			if (i==6||i==11||i==16){
 				System.out.print("\n");
 			}
-		}//inputclass에서 사용자에게서 입력을 받기위한 공휴일 목록 출력 메소드 
+		}
 	}
 	public void show_Result() {
 		if (isStartLunar != 0) {
