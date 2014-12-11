@@ -75,7 +75,7 @@ public class Solaric implements Calendar{
 		// TODO Auto-generated method stub
 		int elapsedDay = 0;
 		for (int i = 1; i <= solar_month; i++) {
-			switch (months[i]) {
+			switch (months[i-1]) {
 			case 1:
 				elapsedDay = elapsedDay + 30;
 				break;
@@ -92,7 +92,7 @@ public class Solaric implements Calendar{
 				break;
 			}
 		}
-		elapsedDay = elapsedDay + solar_day+1;
+		elapsedDay = elapsedDay + solar_day;
 		return elapsedDay;
 	}
 
